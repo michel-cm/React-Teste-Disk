@@ -1,0 +1,38 @@
+.teste-container {
+  margin: auto;
+  max-width: 980px;
+  padding: 40px 16px 80px 16px;
+}
+
+.info-teste-area {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.info-questao-atual-content {
+  font-size: 20px;
+  font-weight: 600 ;
+}
+
+.info-questao-atual {
+  background-color: rgba(255, 0, 0, 0.459);
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+}
+
+.info-tempo{
+  background-color: rgba(0, 128, 0, 0.479);
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+}

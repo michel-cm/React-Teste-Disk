@@ -1,0 +1,29 @@
+import { collection, getDocs } from "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import firebaseConfig from "./firebase";
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+
+export const Api = {
+  getAllQuestions: async () => {
+    let list = [];
+
+    let results = await getDocs(collection(db, "questions"));
+
+    results.forEach((result) => {
+      let data = result.data();
+      list.push({
+        title: data.title,
+        a: data.a,
+        b: data.b,
+        c: data.c,
+        d: data.d,
+      });
+    });
+    return list;
+  }, 
+
+};
+
