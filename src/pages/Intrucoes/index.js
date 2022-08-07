@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/Giro-Agro-logo.png";
 
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+
 export const Instrucoes = () => {
   return (
     <C.Container>
@@ -75,12 +77,15 @@ export const Instrucoes = () => {
               Lembre-se que <b>não podem ocorrer empates</b>. Um mesmo número
               não pode ser usado duas vezes na mesma questão.
             </p>
+            <C.AreaTempo>
+              <AccessTimeOutlinedIcon /> Tempo do teste:<span> 20 minutos</span>.
+            </C.AreaTempo>
           </C.AreaLembrete>
         </C.AreaInstrucoes>
       </C.ContainerInstrucoes>
-      <C.Button>
-        INICIAR TESTE
-      </C.Button>
+      <Link to={"/teste"}>
+        <C.Button>INICIAR TESTE</C.Button>
+      </Link>
     </C.Container>
   );
 };

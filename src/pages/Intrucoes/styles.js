@@ -50,7 +50,7 @@ export const AreaExemploPergunta = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 64px;
+  margin: 10px 64px 0px 64px;
 
   ol {
     padding-top: 8px;
@@ -63,7 +63,8 @@ export const AreaExemploPergunta = styled.div`
 
 export const AreaExemplosResposta = styled.div`
   display: flex;
-  margin: 32px 0px 48px 0;
+  margin: 32px 64px 48px 64px;
+  gap: 32px;
 `;
 
 export const AreaRespostaIncorreta = styled.div`
@@ -73,7 +74,7 @@ export const AreaRespostaIncorreta = styled.div`
   align-items: flex-start;
   padding: 24px;
   flex: 1;
-  margin-right: 24px;
+  
 
   ol {
     padding-left: 20px;
@@ -92,8 +93,7 @@ export const AreaRespostaCorreta = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
-  flex: 1;
-  margin-right: 24px;
+  flex: 1; 
 
   ol {
     padding-left: 20px;
@@ -127,4 +127,16 @@ export const Button = styled.button`
   &:hover {
     filter: brightness(0.9);
   }
+`;
+
+export const AreaTempo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+
+    span {
+        color: #39b54a;
+        font-weight: 500;
+    }
 `;
