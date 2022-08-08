@@ -1,0 +1,51 @@
+.questao-container {
+  padding-top: 60px;
+}
+
+.conteinerTitulo {
+  border-radius: 6px 6px 0 0;
+  background-color: #2b6de6;
+  border-radius: 1px;
+}
+
+.titulo {
+  color: #fff;
+  padding: 20px;
+  font-weight: 300;
+  font-family: "Poppins";
+}
+
+.questao-tabela {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: "Poppins";
+  box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.19);
+}
+
+.questao-tabela h4 {
+  font-weight: 300;
+  font-size: 15x;
+  margin-right: 24px;
+}
+
+.questao-tabela tr td {
+  padding: 16px;
+  border: 1px solid rgba(204, 204, 204, 0.418);
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.questao-tabela input {
+  border: none;
+  background-color: #f7f7f7;
+  border: 1px solid rgba(255, 0, 0, 0.438);
+  width: 60px;
+  height: 40px;
+}
