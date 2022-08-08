@@ -42,3 +42,27 @@ export const InfoTempo = styled.div`
   color: #fff;
   margin-left: 16px;
 `;
+
+export const Button = styled.button`
+  background-color: #5a9bfc;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 80px;
+  cursor: pointer;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    filter: none;
+    cursor: no-drop;
+  }
+`;

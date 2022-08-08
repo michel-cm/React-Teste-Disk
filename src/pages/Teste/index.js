@@ -9,6 +9,7 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import HourglassFullOutlinedIcon from "@mui/icons-material/HourglassFullOutlined";
 import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
 import HourglassEmptyOutlinedIcon from "@mui/icons-material/HourglassEmptyOutlined";
+import { ModalNumber } from "../../components/ModalNumber";
 
 export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
@@ -43,7 +44,10 @@ export const Teste = () => {
           </C.InfoTempo>
         </C.InfoTesteArea>
         <Questao listQuestions={questoes} />
+      <C.Button disabled>Próxima</C.Button>
       </C.TesteContainer>
+      
+
     </C.Container>
   );
 };

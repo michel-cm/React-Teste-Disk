@@ -11,7 +11,7 @@ export const ContainerTituloPergunta = styled.div`
   padding: 20px 16px;
 
   h1 {
-    color: #fff;    
+    color: #fff;
     font-size: 16px;
     font-weight: 300;
   }
@@ -49,5 +49,9 @@ export const ContainerTabela = styled.table`
     border: 1px solid rgba(255, 0, 0, 0.438);
     width: 60px;
     height: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
   }
 `;
