@@ -9,8 +9,9 @@ export const Container = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  position: absolute;
-  transition: all 0.4s;
+  position: fixed;
+  transition: all 0.4s; 
+  z-index: 10;
 `;
 
 export const Modal = styled.div`

@@ -42,22 +42,25 @@ export const ContainerTabela = styled.table`
     align-items: center;
     background-color: #fff;
   }
+`;
 
-  input {
-    border: none;
-    background-color: #f7f7f7;
-    border: 1px solid rgba(255, 0, 0, 0.438);
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #444;
+export const Input = styled.input`
+  border: none;
+  background-color: #f7f7f7;
+  border: ${(props) =>
+    props.validate
+      ? " 1px solid rgba(35,142,35)"
+      : " 1px solid rgba(255, 0, 0, 0.438)"};
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `;

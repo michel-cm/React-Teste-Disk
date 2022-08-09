@@ -9,6 +9,7 @@ export const ModalNumber = ({
   setInputValueD,
   position,
 }) => {
+
   const handleCloseModal = () => {
     setModal(false);
   };

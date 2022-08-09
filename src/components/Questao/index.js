@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import * as C from "./styles";
 import { ModalNumber } from "../../components/ModalNumber";
+
+
 export const Questao = ({ listQuestions }) => {
   const [inputValueA, setInputValueA] = useState();
   const [inputValueB, setInputValueB] = useState();
@@ -14,6 +16,7 @@ export const Questao = ({ listQuestions }) => {
     setPosition(position);
   };
 
+ 
   return (
     <C.Container>
       {listQuestions.map((item, key) => (
@@ -27,20 +30,24 @@ export const Questao = ({ listQuestions }) => {
               <tr>
                 <td>
                   <span>{item.a}</span>
-                  <input
+                  <C.Input                     
+                    validate={(inputValueA ? true : false)}
                     type="number"
                     disabled={modal}
                     value={inputValueA}
                     onChange={(e) => setInputValueA(e.target.value)}
                     onClick={() => handleInput("A")}
-                  />
+                    min={1}
+                    max={4}
+                  />                  
                 </td>
               </tr>
 
               <tr>
                 <td>
                   <span>{item.b}</span>
-                  <input
+                  <C.Input
+                    validate={(inputValueB ? true : false)}
                     type="number"
                     disabled={modal}
                     value={inputValueB}
@@ -53,7 +60,8 @@ export const Questao = ({ listQuestions }) => {
               <tr>
                 <td>
                   <span>{item.c}</span>
-                  <input
+                  <C.Input
+                    validate={(inputValueC ? true : false)}
                     type="number"
                     disabled={modal}
                     value={inputValueC}
@@ -66,7 +74,8 @@ export const Questao = ({ listQuestions }) => {
               <tr>
                 <td>
                   <span>{item.d}</span>
-                  <input
+                  <C.Input
+                    validate={(inputValueD ? true : false)}
                     disabled={modal}
                     type="number"
                     value={inputValueD}
