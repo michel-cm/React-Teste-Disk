@@ -40,10 +40,10 @@ export const ModalNumber = ({
         </C.AreaClose>
         <p>Selecione o valor</p>
         <C.Valores>
-          <C.Button onClick={(e) => handleButtonValueInsert(position, 1)}>1</C.Button>
-          <C.Button onClick={(e) => handleButtonValueInsert(position, 2)}>2</C.Button>
-          <C.Button onClick={(e) => handleButtonValueInsert(position, 3)}>3</C.Button>
-          <C.Button onClick={(e) => handleButtonValueInsert(position, 4)}>4</C.Button>
+          <C.Button onClick={() => handleButtonValueInsert(position, 1)}>1</C.Button>
+          <C.Button onClick={() => handleButtonValueInsert(position, 2)}>2</C.Button>
+          <C.Button onClick={() => handleButtonValueInsert(position, 3)}>3</C.Button>
+          <C.Button onClick={() => handleButtonValueInsert(position, 4)}>4</C.Button>
         </C.Valores>
       </C.Modal>
     </C.Container>

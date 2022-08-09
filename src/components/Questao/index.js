@@ -14,16 +14,6 @@ export const Questao = ({ listQuestions }) => {
     setPosition(position);
   };
 
-  const [state, setState] = useState("");
-
-  const handler = (event) => {
-    // changing the state to the name of the key
-    // which is pressed
-    setState(event.key);
-  };
-
-  console.log(state);
-
   return (
     <C.Container>
       {listQuestions.map((item, key) => (
@@ -39,9 +29,10 @@ export const Questao = ({ listQuestions }) => {
                   <span>{item.a}</span>
                   <input
                     type="number"
+                    disabled={modal}
                     value={inputValueA}
-                    onChange={(e) => setInputValueD(e.target.value)}
-                    onClick={(e) => handleInput("A")}
+                    onChange={(e) => setInputValueA(e.target.value)}
+                    onClick={() => handleInput("A")}
                   />
                 </td>
               </tr>
@@ -51,9 +42,10 @@ export const Questao = ({ listQuestions }) => {
                   <span>{item.b}</span>
                   <input
                     type="number"
+                    disabled={modal}
                     value={inputValueB}
-                    onChange={(e) => setInputValueD(e.target.value)}
-                    onClick={(e) => handleInput("B")}
+                    onChange={(e) => setInputValueB(e.target.value)}
+                    onClick={() => handleInput("B")}
                   />
                 </td>
               </tr>
@@ -63,9 +55,10 @@ export const Questao = ({ listQuestions }) => {
                   <span>{item.c}</span>
                   <input
                     type="number"
+                    disabled={modal}
                     value={inputValueC}
-                    onChange={(e) => setInputValueD(e.target.value)}
-                    onClick={(e) => handleInput("C")}
+                    onChange={(e) => setInputValueC(e.target.value)}
+                    onClick={() => handleInput("C")}
                   />
                 </td>
               </tr>
@@ -74,10 +67,11 @@ export const Questao = ({ listQuestions }) => {
                 <td>
                   <span>{item.d}</span>
                   <input
+                    disabled={modal}
                     type="number"
                     value={inputValueD}
                     onChange={(e) => setInputValueD(e.target.value)}
-                    onClick={(e) => handleInput("D")}
+                    onClick={() => handleInput("D")}
                   />
                 </td>
               </tr>
@@ -85,7 +79,7 @@ export const Questao = ({ listQuestions }) => {
           </C.ContainerTabela>
         </div>
       ))}
-      {modal === true && (
+      {modal && (
         <ModalNumber
           setModal={setModal}
           setInputValueA={setInputValueA}
