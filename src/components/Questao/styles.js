@@ -44,19 +44,24 @@ export const ContainerTabela = styled.table`
   }
 `;
 
+export const ButtonOverLay = styled.button`
+  border: none;
+`;
+
 export const Input = styled.input`
   border: none;
   background-color: #f7f7f7;
   border: ${(props) =>
     props.validate
-      ? " 1px solid rgba(35,142,35)"
-      : " 1px solid rgba(255, 0, 0, 0.438)"};
+      ? " 2px solid rgba(35,142,35)"
+      : " 2px solid rgba(255, 0, 0, 0.438)"};
   width: 60px;
-  height: 40px;
+  height: 45px;
   text-align: center;
   font-size: 16px;
   font-weight: 600;
   color: #444;
+  cursor: pointer;
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {

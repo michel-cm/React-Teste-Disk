@@ -15,28 +15,20 @@ export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
   const [ buttonNextActive, setButtonNextActive] = useState(true);
   const [ userAnswers, setUserAnswers] = useState([]);
-  let questoes = [...listQuestions];
-
+  
   const getList = async () => {
     let results = await Api.getAllQuestions();
+    localStorage.setItem('listQuestions', JSON.stringify(results));  
     setListQuestions(results);
   };
- 
-  useEffect(() => {
-    if (listQuestions.length === 0) {
-      getList();
-    }
-  }, []);
 
   function elementEqual(element, index, array){
     return element == ''
   }
-
   useEffect(() => {
       if(userAnswers.some(elementEqual)){
         return
       }
-
       if(userAnswers.length > 0) {
       for(let i =0; i < userAnswers.length; i++) {
         for(let j = i+1; j < userAnswers.length; j++) {
@@ -49,6 +41,15 @@ export const Teste = () => {
        setButtonNextActive(false);
     }    
   },[userAnswers]);
+
+  useEffect(() => { ////////
+    const listLocal = localStorage.getItem('listQuestions');
+      if(listLocal.length > 0) {
+        setListQuestions(JSON.parse(listLocal));
+      }else {
+        getList();
+      }
+  },[])
 
   return (
     <C.Container>
@@ -64,7 +65,7 @@ export const Teste = () => {
             <span className="info-questao-atual-content">18:32</span>
           </C.InfoTempo>
         </C.InfoTesteArea>
-        <Questao listQuestions={questoes} setUserAnswers={setUserAnswers}/>
+        <Questao listQuestions={listQuestions} setUserAnswers={setUserAnswers}/>
       <C.Button disabled={buttonNextActive} >Próxima</C.Button>
       </C.TesteContainer>
       
