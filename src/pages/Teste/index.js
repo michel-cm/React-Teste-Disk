@@ -43,8 +43,8 @@ export const Teste = () => {
   },[userAnswers]);
 
   useEffect(() => { ////////
-    const listLocal = localStorage.getItem('listQuestions');
-      if(listLocal.length > 0) {
+    const listLocal = localStorage.getItem('listQuestions');    
+      if(listLocal !== null) {
         setListQuestions(JSON.parse(listLocal));
       }else {
         getList();
