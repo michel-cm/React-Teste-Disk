@@ -9,12 +9,19 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import HourglassFullOutlinedIcon from "@mui/icons-material/HourglassFullOutlined";
 import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
 import HourglassEmptyOutlinedIcon from "@mui/icons-material/HourglassEmptyOutlined";
+
 import { ModalNumber } from "../../components/ModalNumber";
+
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
   const [ buttonNextActive, setButtonNextActive] = useState(true);
   const [ userAnswers, setUserAnswers] = useState([]);
+
+  const navigate = useNavigate();
+  const { user } = useAuth();
   
   const getList = async () => {
     let results = await Api.getAllQuestions();
@@ -49,6 +56,12 @@ export const Teste = () => {
       }else {
         getList();
       }
+  },[])
+
+  useEffect(() => {
+    if(!user) {
+      navigate('/');
+    }
   },[])
 
   return (

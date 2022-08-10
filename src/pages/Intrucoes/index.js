@@ -5,7 +5,21 @@ import logo from "../../assets/Giro-Agro-logo.png";
 
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
+
 export const Instrucoes = () => {
+
+  const navigate = useNavigate();
+  const { user} = useAuth();
+
+  useEffect(() => {
+    if(!user) {
+      navigate('/');
+    }
+  },[])
+
   return (
     <C.Container>
       <C.Logo src={logo} alt="Giro Agro logo" />

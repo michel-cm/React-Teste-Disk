@@ -13,7 +13,7 @@ export const Header = () => {
         <span>Michel Corrêa Martins</span>
       </C.UserArea>
       
-        <Link to={"/"}><C.Button><p>Instruções</p>
+        <Link to={"/instrucoes"}><C.Button><p>Instruções</p>
           </C.Button></Link>
     
     </C.Container>
