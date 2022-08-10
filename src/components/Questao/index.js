@@ -1,24 +1,31 @@
 import { useState, useEffect } from "react";
 import * as C from "./styles";
 import { ModalNumber } from "../../components/ModalNumber";
+import { Valores } from "../ModalNumber/styles";
 
-
-export const Questao = ({ listQuestions }) => {
-  const [inputValueA, setInputValueA] = useState();
-  const [inputValueB, setInputValueB] = useState();
-  const [inputValueC, setInputValueC] = useState();
-  const [inputValueD, setInputValueD] = useState();
+export const Questao = ({ listQuestions,setUserAnswers }) => {
+  const [inputValueA, setInputValueA] = useState("");
+  const [inputValueB, setInputValueB] = useState("");
+  const [inputValueC, setInputValueC] = useState("");
+  const [inputValueD, setInputValueD] = useState("");
   const [position, setPosition] = useState("");
   const [modal, setModal] = useState(false);
-
+  
   const handleInput = (position) => {
     setModal(true);
     setPosition(position);
   };
 
- 
+  let valoresInputs =[]
+  useEffect(() => {
+    if(position !== '' ){
+      valoresInputs = [inputValueA,inputValueB,inputValueC, inputValueD];
+      setUserAnswers(valoresInputs)
+    }      
+  },[inputValueA, inputValueB, inputValueC, inputValueD]) 
+
   return (
-    <C.Container>
+    <C.Container> 
       {listQuestions.map((item, key) => (
         <div key={key} className="questao-item">
           <C.ContainerTituloPergunta>
@@ -30,16 +37,16 @@ export const Questao = ({ listQuestions }) => {
               <tr>
                 <td>
                   <span>{item.a}</span>
-                  <C.Input                     
-                    validate={(inputValueA ? true : false)}
+                  <C.Input
+                    validate={inputValueA && (inputValueA !== inputValueB) && (inputValueA !== inputValueC) && (inputValueA !== inputValueD) ? true : false }
                     type="number"
                     disabled={modal}
                     value={inputValueA}
                     onChange={(e) => setInputValueA(e.target.value)}
-                    onClick={() => handleInput("A")}
+                    onClick={() => handleInput("A")} 
                     min={1}
                     max={4}
-                  />                  
+                  />
                 </td>
               </tr>
 
@@ -47,7 +54,7 @@ export const Questao = ({ listQuestions }) => {
                 <td>
                   <span>{item.b}</span>
                   <C.Input
-                    validate={(inputValueB ? true : false)}
+                    validate={inputValueB && (inputValueB !== inputValueA) && (inputValueB !== inputValueC) && (inputValueB !== inputValueD) ? true : false }
                     type="number"
                     disabled={modal}
                     value={inputValueB}
@@ -61,12 +68,12 @@ export const Questao = ({ listQuestions }) => {
                 <td>
                   <span>{item.c}</span>
                   <C.Input
-                    validate={(inputValueC ? true : false)}
+                    validate={inputValueC && (inputValueC !== inputValueA) && (inputValueC !== inputValueB) && (inputValueC !== inputValueD) ? true : false }
                     type="number"
                     disabled={modal}
                     value={inputValueC}
                     onChange={(e) => setInputValueC(e.target.value)}
-                    onClick={() => handleInput("C")}
+                    onClick={() => handleInput("C")} 
                   />
                 </td>
               </tr>
@@ -75,7 +82,7 @@ export const Questao = ({ listQuestions }) => {
                 <td>
                   <span>{item.d}</span>
                   <C.Input
-                    validate={(inputValueD ? true : false)}
+                    validate={inputValueD && (inputValueD !== inputValueA) && (inputValueD !== inputValueB) && (inputValueD !== inputValueC) ? true : false }
                     disabled={modal}
                     type="number"
                     value={inputValueD}
@@ -95,7 +102,7 @@ export const Questao = ({ listQuestions }) => {
           setInputValueB={setInputValueB}
           setInputValueC={setInputValueC}
           setInputValueD={setInputValueD}
-          position={position}
+          positionInputQuestion={position}
         />
       )}
     </C.Container>

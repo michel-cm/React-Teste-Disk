@@ -1,5 +1,6 @@
 import * as C from "./styles";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { useState } from "react";
 
 export const ModalNumber = ({
   setModal,
@@ -7,29 +8,28 @@ export const ModalNumber = ({
   setInputValueB,
   setInputValueC,
   setInputValueD,
-  position,
+  positionInputQuestion,
 }) => {
-
   const handleCloseModal = () => {
     setModal(false);
   };
 
-  const handleButtonValueInsert = (position, value) => {
-    if (position === "A") {
-        setInputValueA(value)
-        handleCloseModal();
+  const handleButtonValueInsert = (positionInputQuestion, value) => {
+    if (positionInputQuestion === "A") {
+      setInputValueA(value);
+      handleCloseModal();
     }
-    if (position === "B") {
-        setInputValueB(value)
-        handleCloseModal();
+    if (positionInputQuestion === "B") {
+      setInputValueB(value);
+      handleCloseModal();
     }
-    if (position === "C") {
-        setInputValueC(value)
-        handleCloseModal();
+    if (positionInputQuestion === "C") {
+      setInputValueC(value);
+      handleCloseModal();
     }
-    if (position === "D") {
-        setInputValueD(value)
-        handleCloseModal();
+    if (positionInputQuestion === "D") {
+      setInputValueD(value);
+      handleCloseModal();
     }
   };
 
@@ -41,10 +41,26 @@ export const ModalNumber = ({
         </C.AreaClose>
         <p>Selecione o valor</p>
         <C.Valores>
-          <C.Button onClick={() => handleButtonValueInsert(position, 1)}>1</C.Button>
-          <C.Button onClick={() => handleButtonValueInsert(position, 2)}>2</C.Button>
-          <C.Button onClick={() => handleButtonValueInsert(position, 3)}>3</C.Button>
-          <C.Button onClick={() => handleButtonValueInsert(position, 4)}>4</C.Button>
+          <C.Button
+            onClick={() => handleButtonValueInsert(positionInputQuestion, 1)}
+          >
+            1
+          </C.Button>
+          <C.Button
+            onClick={() => handleButtonValueInsert(positionInputQuestion, 2)}
+          >
+            2
+          </C.Button>
+          <C.Button
+            onClick={() => handleButtonValueInsert(positionInputQuestion, 3)}
+          >
+            3
+          </C.Button>
+          <C.Button
+            onClick={() => handleButtonValueInsert(positionInputQuestion, 4)}
+          >
+            4
+          </C.Button>
         </C.Valores>
       </C.Modal>
     </C.Container>

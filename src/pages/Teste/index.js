@@ -13,21 +13,42 @@ import { ModalNumber } from "../../components/ModalNumber";
 
 export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
-
+  const [ buttonNextActive, setButtonNextActive] = useState(true);
+  const [ userAnswers, setUserAnswers] = useState([]);
   let questoes = [...listQuestions];
 
   const getList = async () => {
     let results = await Api.getAllQuestions();
     setListQuestions(results);
   };
-  console.log(questoes);
+ 
   useEffect(() => {
-    if (listQuestions.length == 0) {
+    if (listQuestions.length === 0) {
       getList();
     }
   }, []);
 
-  console.log(listQuestions)
+  function elementEqual(element, index, array){
+    return element == ''
+  }
+
+  useEffect(() => {
+      if(userAnswers.some(elementEqual)){
+        return
+      }
+
+      if(userAnswers.length > 0) {
+      for(let i =0; i < userAnswers.length; i++) {
+        for(let j = i+1; j < userAnswers.length; j++) {
+          if(userAnswers[i] == userAnswers[j]) { 
+              setButtonNextActive(true); 
+              return;
+          }
+        } 
+       }
+       setButtonNextActive(false);
+    }    
+  },[userAnswers]);
 
   return (
     <C.Container>
@@ -43,8 +64,8 @@ export const Teste = () => {
             <span className="info-questao-atual-content">18:32</span>
           </C.InfoTempo>
         </C.InfoTesteArea>
-        <Questao listQuestions={questoes} />
-      <C.Button disabled>Próxima</C.Button>
+        <Questao listQuestions={questoes} setUserAnswers={setUserAnswers}/>
+      <C.Button disabled={buttonNextActive} >Próxima</C.Button>
       </C.TesteContainer>
       
 
