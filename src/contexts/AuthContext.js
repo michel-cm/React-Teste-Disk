@@ -5,7 +5,7 @@ import { auth, firebase } from "../services/firebase";
 export const AuthContext = createContext({});
 
 export function AuthContextProvider(props) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -29,9 +29,8 @@ export function AuthContextProvider(props) {
     };
   }, []);
 
-  async function signInWithGoogle() {
+  async function signInWithGoogle() {   
     const provider = new firebase.auth.GoogleAuthProvider();
-
     const result = await auth.signInWithPopup(provider);
 
     if (result.user) {

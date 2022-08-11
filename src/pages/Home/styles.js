@@ -13,9 +13,16 @@ export const AreaAccount = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 320px;
+  max-width: 380px;
   align-items: stretch;
   text-align: center;
+  background-color: #FFF;
+  padding: 64px;
+  box-shadow: #ea4335;
+
+  box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.10);
+  -moz-box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.10);
 
   img {
     width: 100px;
