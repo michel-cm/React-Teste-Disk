@@ -18,25 +18,33 @@ export const Home = () => {
     navigate("/instrucoes");
   }
 
-  useEffect(()=> {
-    if(user) {
-      navigate('instrucoes');
+  useEffect(() => {
+    if (user) {
+      navigate("/instrucoes");
     }
-  },[user])
+  }, [user]);
 
   return (
     <C.Container>
       <C.AreaAccount>
         <img src={logo} alt="Giro Agro Logo"></img>
-        <form>
-          <input type={'email'} placeholder="Email"></input>
-          <input type={'password'} placeholder="Email"></input>
-          <button type="submit">Entrar</button>
-        </form>
-        <button onClick={handleLoginGoogle}>
+        <C.FormArea>
+          <C.Name type={"text"} placeholder="Nome"></C.Name>
+          <C.Email type={"email"} placeholder="Email"></C.Email>
+          <C.Passoword type={"password"} placeholder="Senha"></C.Passoword>
+          <C.PassowordVerificy
+            type={"password"}
+            placeholder="Confirme sua senha"
+          ></C.PassowordVerificy>
+          <C.ButtonSubmitEmail type="submit">Entrar</C.ButtonSubmitEmail>
+        </C.FormArea>
+        <C.Ou>
+          <p>ou</p>
+        </C.Ou>
+        <C.ButtonGoogle onClick={handleLoginGoogle}>
           <img src={googleIconImg} alt="logo do Google" />
           Entre com o Google
-        </button>
+        </C.ButtonGoogle>
       </C.AreaAccount>
     </C.Container>
   );

@@ -66,7 +66,7 @@ export const Instrucoes = () => {
 
             <C.AreaRespostaCorreta>
               <p>
-                Vejamos um <span>exemplo correto.</span>
+                Agora vejamos um <span>exemplo correto.</span>
               </p>
               <ol type="A">
                 <li>2</li>

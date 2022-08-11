@@ -62,7 +62,7 @@ export const Teste = () => {
     if(!user) {
       navigate('/');
     }
-  },[])
+  },[user])
 
   return (
     <C.Container>

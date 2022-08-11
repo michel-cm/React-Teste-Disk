@@ -5,12 +5,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
 `;
 
 export const Logo = styled.img`
   width: 120px;
   padding: 60px 0px 60px 0px;
+
+  @media (max-width: 460px) {   
+    padding: 60px 0px 24px 0px;
+  }
+  
 `;
 
 export const ContainerInstrucoes = styled.div`
@@ -18,7 +22,7 @@ export const ContainerInstrucoes = styled.div`
   flex-direction: column;
   background-color: #fff;
   max-width: 1100px;
-  padding: 48px;
+  padding: 24px;
 `;
 
 export const TituloArea = styled.div`
@@ -59,12 +63,21 @@ export const AreaExemploPergunta = styled.div`
   li {
     padding-bottom: 4px;
   }
+
+  @media (max-width: 460px) {
+    margin: 10px 14px 0px 14px;
+  }
 `;
 
 export const AreaExemplosResposta = styled.div`
   display: flex;
   margin: 32px 64px 48px 64px;
   gap: 32px;
+
+  @media (max-width: 460px) {   
+    margin : 24px 0px 24px 0px ;
+    gap: 16px;
+  }
 `;
 
 export const AreaRespostaIncorreta = styled.div`
@@ -74,7 +87,6 @@ export const AreaRespostaIncorreta = styled.div`
   align-items: flex-start;
   padding: 24px;
   flex: 1;
-  
 
   ol {
     padding-left: 20px;
@@ -85,6 +97,10 @@ export const AreaRespostaIncorreta = styled.div`
     font-weight: 500;
     color: #ed3237;
   }
+  @media (max-width: 460px) {   
+    padding: 16px;
+  }
+  
 `;
 
 export const AreaRespostaCorreta = styled.div`
@@ -93,7 +109,7 @@ export const AreaRespostaCorreta = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
-  flex: 1; 
+  flex: 1;
 
   ol {
     padding-left: 20px;
@@ -104,6 +120,10 @@ export const AreaRespostaCorreta = styled.div`
     font-weight: 500;
     color: #39b54a;
   }
+  @media (max-width: 460px) {   
+    padding: 18px 25px 18px 25px;
+  }
+  
 `;
 
 export const AreaLembrete = styled.div`
@@ -130,13 +150,13 @@ export const Button = styled.button`
 `;
 
 export const AreaTempo = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
 
-    span {
-        color: #39b54a;
-        font-weight: 500;
-    }
+  span {
+    color: #39b54a;
+    font-weight: 500;
+  }
 `;

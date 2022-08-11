@@ -12,7 +12,7 @@ export const ContainerTituloPergunta = styled.div`
 
   h1 {
     color: #fff;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 300;
   }
 `;
