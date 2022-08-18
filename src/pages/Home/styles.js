@@ -7,20 +7,14 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
 
-export const Logo = styled.img`
-  width: 100px;
-  align-self: center;
-  margin-bottom: 48px;
 `;
 
 export const AreaAccount = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 480px;
-  height: 80vh;
+  width: 92%;
+  max-width: 480px;  
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -33,6 +27,12 @@ export const AreaAccount = styled.div`
   -moz-box-shadow: -13px 7px 33px -9px rgba(0, 0, 0, 0.1);
 `;
 
+export const Logo = styled.img`
+  width: 100px;
+  align-self: center;
+  margin-bottom: 24px;
+`;
+
 export const FormArea = styled.form`
   display: flex;
   flex-direction: column;
@@ -42,10 +42,14 @@ export const FormArea = styled.form`
   h1 {
     margin-bottom: 48px;
   }
+
+  input {
+    font-size: 15px;
+  }
 `;
 
 export const Name = styled.input`
-  padding: 10px; 
+  padding: 10px;
   width: 90%;
 `;
 
@@ -88,7 +92,7 @@ export const ButtonGoogle = styled.div`
   height: 50px;
   font-weight: 400;
   background: #ea4335;
-  color: #fff;  
+  color: #fff;
   border-radius: 50px;
 
   display: flex;
@@ -117,7 +121,7 @@ export const Ou = styled.div`
 `;
 
 export const AreaSignUp = styled.div`
-  margin-top: 140px;
+  margin-top: 70px;
 
   p {
     color: grey;
