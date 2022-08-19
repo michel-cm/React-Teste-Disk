@@ -38,7 +38,7 @@ export const Home = () => {
   const handleLoginEmail = async (e) => {
     e.preventDefault();
     if(!user) {      
-      await loginWithEmail(email, password, name).then(() => navigate('/instrucoes'));
+      await loginWithEmail(email, password).then(() => navigate('/instrucoes'));
     }
   }
 

@@ -1,5 +1,4 @@
 import * as C from "./styles";
-
 import { Questao } from "../../components/Questao";
 import { useEffect, useState } from "react";
 import { Api } from "../../services/Api";
@@ -29,13 +28,21 @@ export const Teste = () => {
   ] = useState(false);
 
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   const getList = async () => {
     let results = await Api.getAllQuestions();
     localStorage.setItem("listQuestions", JSON.stringify(results));    
     setListQuestions(results);  
   };
+
+  const getNameU = async () => {
+    let result = await Api.getNameUser(user.id);
+    setUser({
+      ...user,
+      name: result.name
+    })
+  }
 
   const createCollectionAnswer = async () => {    
       await Api.createDefaultCollectionAnswerUser(user, listQuestions, collectionDefaultUserAnswerCreated);
@@ -75,7 +82,7 @@ export const Teste = () => {
   useEffect(() => {
     if (!user) {
       navigate("/");
-    }
+    }   
   }, [user]);
 
   useEffect(() => {
@@ -89,6 +96,7 @@ export const Teste = () => {
   }, [user, listQuestions]);
 
   const handleSubmitQuestion = () => {};
+ 
 
   return (
     <C.Container>

@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 
 export const Header = () => {
-  const { user, setUser, logoutWithGoogle } = useAuth();
+  const { user, logoutWithGoogle } = useAuth();
 
   const [logoutArea, setLogoutArea] = useState(false);
 
@@ -20,8 +20,7 @@ export const Header = () => {
 
   const handleLogout = async (user) => {
     if (user) {
-      await logoutWithGoogle();
-      Navigate("/");
+      await logoutWithGoogle().then(()=> Navigate("/"));      
     }
   };
 

@@ -21,8 +21,7 @@ export function AuthContextProvider(props) {
 
         setUser({
           id: uid,
-          name: displayName,
-          avatar: photoURL,
+          name: displayName,          
           email: email
         });
       }
@@ -43,7 +42,6 @@ export function AuthContextProvider(props) {
       if (!displayName) {
         throw new Error("Missing information from Google account.");
       }
-
       
       setUser({
         id: uid,
@@ -83,26 +81,34 @@ export function AuthContextProvider(props) {
     //.finally(() => setIsLoading(false));
   }
   
-  async function loginWithEmail(email, senha, nome) {
+  async function loginWithEmail(email, senha) {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => { 
-        const user = userCredential.user;         
+        const user = userCredential.user;        
         setUser({
-          id: user.id,
-          name: nome,       
+          id: user.uid,                
           email: user.email
-        });
+        });    
+        getName();    
+        })
+        .catch((error) => {
+          console.log(error)
+        });       
+  }
 
-             console.log('LOGADOOOOOO')
-      })
-      .catch((error) => {
-        console.log('xiii ' +error)
-      });
+  async function getName() {
+    const auth = getAuth();
+    const userId = auth.currentUser.uid;
+    let resultName = await Api.getNameUser(userId);
+    setUser({
+      ...user,
+      name: resultName
+    })
   }
   
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle,logoutWithGoogle, createAccount, loginWithEmail}}>
+    <AuthContext.Provider value={{ user,setUser, signInWithGoogle,logoutWithGoogle, createAccount, loginWithEmail}}>
       {props.children}
     </AuthContext.Provider>
   );
