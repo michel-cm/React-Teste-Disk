@@ -17,52 +17,78 @@ import { useAuth } from "../../hooks/useAuth";
 
 export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
-  const [ buttonNextActive, setButtonNextActive] = useState(true);
-  const [ userAnswers, setUserAnswers] = useState([]);
+  const [buttonNextActive, setButtonNextActive] = useState(true);
+  const [userAnswers, setUserAnswers] = useState([]);
+
+  const [currentQuestion, setcurrentQuestion] = useState(1);
+  const [lastQuestion, setLastQuestion] = useState(false);
+
+  const [
+    collectionDefaultUserAnswerCreated,
+    setcollectionDefaultUserAnswerCreated,
+  ] = useState(false);
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  
+
   const getList = async () => {
     let results = await Api.getAllQuestions();
-    localStorage.setItem('listQuestions', JSON.stringify(results));  
-    setListQuestions(results);
+    localStorage.setItem("listQuestions", JSON.stringify(results));    
+    setListQuestions(results);  
   };
 
-  function elementEqual(element, index, array){
-    return element == ''
+  const createCollectionAnswer = async () => {    
+      await Api.createDefaultCollectionAnswerUser(user, listQuestions, collectionDefaultUserAnswerCreated);
+      console.log("Criando collection aqui");    
+  };
+
+  function elementEqual(element, index, array) {
+    return element == "";
   }
   useEffect(() => {
-      if(userAnswers.some(elementEqual)){
-        return
-      }
-      if(userAnswers.length > 0) {
-      for(let i =0; i < userAnswers.length; i++) {
-        for(let j = i+1; j < userAnswers.length; j++) {
-          if(userAnswers[i] == userAnswers[j]) { 
-              setButtonNextActive(true); 
-              return;
+    if (userAnswers.some(elementEqual)) {
+      return;
+    }
+    if (userAnswers.length > 0) {
+      for (let i = 0; i < userAnswers.length; i++) {
+        for (let j = i + 1; j < userAnswers.length; j++) {
+          if (userAnswers[i] == userAnswers[j]) {
+            setButtonNextActive(true);
+            return;
           }
-        } 
-       }
-       setButtonNextActive(false);
-    }    
-  },[userAnswers]);
-
-  useEffect(() => { ////////
-    const listLocal = localStorage.getItem('listQuestions');    
-      if(listLocal !== null) {
-        setListQuestions(JSON.parse(listLocal));
-      }else {
-        getList();
+        }
       }
-  },[])
+      setButtonNextActive(false);
+    }
+  }, [userAnswers]);
 
   useEffect(() => {
-    if(!user) {
-      navigate('/');
+    ////////
+    const listLocal = localStorage.getItem("listQuestions");
+    if (listLocal !== null) {
+      setListQuestions(JSON.parse(listLocal));
+    } else {
+      getList();
     }
-  },[user])
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const resultLocal = localStorage.getItem("collectionDefaultUserAnswerCreated");
+    if (!resultLocal) {     
+      setcollectionDefaultUserAnswerCreated(true);
+      createCollectionAnswer();         
+    } else {    
+      return
+    } 
+  }, [user, listQuestions]);
+
+  const handleSubmitQuestion = () => {};
 
   return (
     <C.Container>
@@ -78,11 +104,14 @@ export const Teste = () => {
             <span className="info-questao-atual-content">18:32</span>
           </C.InfoTempo>
         </C.InfoTesteArea>
-        <Questao listQuestions={listQuestions} setUserAnswers={setUserAnswers}/>
-      <C.Button disabled={buttonNextActive} >Próxima</C.Button>
+        <Questao
+          listQuestions={listQuestions}
+          setUserAnswers={setUserAnswers}
+        />
+        <C.Button disabled={buttonNextActive} onClick={handleSubmitQuestion}>
+          Próxima
+        </C.Button>
       </C.TesteContainer>
-      
-
     </C.Container>
   );
 };

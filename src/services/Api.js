@@ -1,7 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
+import { doc, setDoc, collection, getDocs, addDoc } from "firebase/firestore";
 import "firebase/compat/firestore";
-import {firebase, database } from "../services/firebase";
-
+import { firebase, database } from "../services/firebase";
 
 export const Api = {
   getAllQuestions: async () => {
@@ -22,5 +21,44 @@ export const Api = {
       });
     });
     return list;
+  },
+
+  addUser:async (id, name) => {
+    await database.collection('users').doc(id).set({
+      id,
+      name,
+    }, {merge:true});
+  },
+
+  createDefaultCollectionAnswerUser: async (
+    user,
+    listQuestions,
+    collectionDefaultUserAnswerCreated
+  ) => {
+    if (collectionDefaultUserAnswerCreated) {
+      return;
+    }
+    if (user && listQuestions) {
+      localStorage.setItem("collectionDefaultUserAnswerCreated", {id: user.id, create:true});
+      let questaoA,
+        questaoB,
+        questaoC,
+        questaoD = "";
+      const docData = {
+        data: new Date(),
+        finalizado: false,
+        idUser: user.id,
+        predominancia: "",
+        tempoExcedido: false,
+        resultadoFinal: {
+          totalA: 0,
+          totalB: 0,
+          totalC: 0,
+          totalD: 0,
+        },
+      };
+
+      await addDoc(collection(database, "respostas"), docData);
+    }
   },
 };

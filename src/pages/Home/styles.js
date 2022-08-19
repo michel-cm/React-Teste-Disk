@@ -66,7 +66,7 @@ export const Passoword = styled.input`
 
 export const PassowordVerificy = styled.input`
   padding: 10px;
-  margin: 22px 0;
+  margin: 14px 0;
   width: 90%;
 `;
 

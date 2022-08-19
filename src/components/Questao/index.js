@@ -25,6 +25,8 @@ export const Questao = ({ listQuestions, setUserAnswers }) => {
     }
   }, [inputValueA, inputValueB, inputValueC, inputValueD]);
 
+  
+
   return (
     <C.Container>
       {listQuestions.map((item, key) => (
