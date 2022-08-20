@@ -28,21 +28,13 @@ export const Teste = () => {
   ] = useState(false);
 
   const navigate = useNavigate();
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
 
   const getList = async () => {
     let results = await Api.getAllQuestions();
     localStorage.setItem("listQuestions", JSON.stringify(results));    
     setListQuestions(results);  
   };
-
-  const getNameU = async () => {
-    let result = await Api.getNameUser(user.id);
-    setUser({
-      ...user,
-      name: result.name
-    })
-  }
 
   const createCollectionAnswer = async () => {    
       await Api.createDefaultCollectionAnswerUser(user, listQuestions, collectionDefaultUserAnswerCreated);

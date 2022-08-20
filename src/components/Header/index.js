@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 
 export const Header = () => {
-  const { user, logoutWithGoogle } = useAuth();
+  const { user, logoutAccount, setUser } = useAuth();
 
   const [logoutArea, setLogoutArea] = useState(false);
 
@@ -18,17 +18,20 @@ export const Header = () => {
     setLogoutArea(!logoutArea);
   };
 
-  const handleLogout = async () => {   
-      await logoutWithGoogle();     
-    
+  const handleLogout = async () => {
+    await logoutAccount();
   };
+
+ 
 
   return (
     <>
       <C.Container>
         <C.UserArea>
           <span onClick={handleLogoutModalOpen}>
-            <AccountCircleOutlinedIcon style={{ color: "#2B6DE6", marginRight: "4px"}} />
+            <AccountCircleOutlinedIcon
+              style={{ color: "#2B6DE6", marginRight: "4px" }}
+            />
             {user ? user.name : ""}
             {logoutArea ? (
               <ArrowDropDownOutlinedIcon style={{ color: "#2B6DE6" }} />

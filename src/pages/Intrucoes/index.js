@@ -9,16 +9,33 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect } from "react";
 
+import { Api } from "../../services/Api";
+
+
 export const Instrucoes = () => {
 
-  const navigate = useNavigate();
-  const { user} = useAuth();
+  const { user, setUser } = useAuth();
+
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if(!user) {
       navigate('/');
     }
   },[])
+
+  useEffect(() => {
+    const getName = async () => {
+        if (user != null) {
+        const data = await Api.getNameUser(user.id);        
+        setUser({
+          ...user,         
+          name: data.name
+        })
+      };
+    }
+    getName();
+  }, []);
 
   return (
     <C.Container>

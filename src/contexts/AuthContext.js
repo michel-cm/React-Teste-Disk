@@ -6,6 +6,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 } from "firebase/auth";
 import { Api } from "../services/Api";
 
@@ -19,10 +21,6 @@ export function AuthContextProvider(props) {
       if (user) {
         const { displayName, photoURL, uid, email } = user;
 
-        if (!displayName) {
-          throw new Error("Missing information from Google account.");
-        }
-
         setUser({
           id: uid,
           name: displayName,
@@ -34,6 +32,18 @@ export function AuthContextProvider(props) {
     return () => {
       unsubscribe();
     };
+  }, []);
+
+  useEffect(() => {
+    const auth = getAuth();
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, user.email, user.senha);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }, []);
 
   async function signInWithGoogle() {
@@ -57,7 +67,7 @@ export function AuthContextProvider(props) {
     }
   }
 
-  async function logoutWithGoogle() {
+  async function logoutAccount() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
@@ -120,7 +130,7 @@ export function AuthContextProvider(props) {
         user,
         setUser,
         signInWithGoogle,
-        logoutWithGoogle,
+        logoutAccount,
         createAccount,
         loginWithEmail,
       }}
