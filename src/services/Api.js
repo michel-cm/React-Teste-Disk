@@ -33,7 +33,7 @@ export const Api = {
   getNameUser: async (id) => {
     let user = await database.collection('users').doc(id).get();
     let userData = user.data();
-    return userData.name;
+    return userData;
   },
 
   createDefaultCollectionAnswerUser: async (

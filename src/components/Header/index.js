@@ -18,10 +18,9 @@ export const Header = () => {
     setLogoutArea(!logoutArea);
   };
 
-  const handleLogout = async (user) => {
-    if (user) {
-      await logoutWithGoogle().then(()=> Navigate("/"));      
-    }
+  const handleLogout = async () => {   
+      await logoutWithGoogle();     
+    
   };
 
   return (
@@ -48,7 +47,7 @@ export const Header = () => {
       {logoutArea && (
         <C.LogoutArea>
           <p>{user ? user.email : "Email ERROR"}</p>
-          <button onClick={() => handleLogout(user)}>Sair</button>
+          <button onClick={() => handleLogout()}>Sair</button>
         </C.LogoutArea>
       )}
     </>
