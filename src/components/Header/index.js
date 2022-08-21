@@ -1,6 +1,6 @@
 import * as C from "./style";
 
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
@@ -10,7 +10,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 
 export const Header = () => {
-  const { user, logoutAccount, setUser } = useAuth();
+  const { user, logoutAccount } = useAuth();
 
   const [logoutArea, setLogoutArea] = useState(false);
 
@@ -21,8 +21,6 @@ export const Header = () => {
   const handleLogout = async () => {
     await logoutAccount();
   };
-
- 
 
   return (
     <>

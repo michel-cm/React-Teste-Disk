@@ -27,7 +27,7 @@ export const Instrucoes = () => {
   useEffect(() => {
     const getName = async () => {
         if (user != null) {
-        const data = await Api.getNameUser(user.id);        
+        const data = await Api.getUser(user.id);        
         setUser({
           ...user,         
           name: data.name

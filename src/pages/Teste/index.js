@@ -9,36 +9,26 @@ import HourglassFullOutlinedIcon from "@mui/icons-material/HourglassFullOutlined
 import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
 import HourglassEmptyOutlinedIcon from "@mui/icons-material/HourglassEmptyOutlined";
 
-import { ModalNumber } from "../../components/ModalNumber";
-
 import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../../hooks/useAuth";
+import { useControlsQuestions } from "../../hooks/useControlsQuestions";
 
 export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
   const [buttonNextActive, setButtonNextActive] = useState(true);
   const [userAnswers, setUserAnswers] = useState([]);
-
-  const [currentQuestion, setcurrentQuestion] = useState(1);
-  const [lastQuestion, setLastQuestion] = useState(false);
-
-  const [
-    collectionDefaultUserAnswerCreated,
-    setcollectionDefaultUserAnswerCreated,
-  ] = useState(false);
+  const [isLastQuestion, setisLastQuestion] = useState(listQuestions.length);
 
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { currentQuestion, lastQuestion, setcurrentQuestion, setLastQuestion } =
+    useControlsQuestions();
 
   const getList = async () => {
     let results = await Api.getAllQuestions();
-    localStorage.setItem("listQuestions", JSON.stringify(results));    
-    setListQuestions(results);  
-  };
-
-  const createCollectionAnswer = async () => {    
-      await Api.createDefaultCollectionAnswerUser(user, listQuestions, collectionDefaultUserAnswerCreated);
-      console.log("Criando collection aqui");    
+    localStorage.setItem("listQuestions", JSON.stringify(results));
+    setListQuestions(results);
   };
 
   function elementEqual(element, index, array) {
@@ -74,21 +64,25 @@ export const Teste = () => {
   useEffect(() => {
     if (!user) {
       navigate("/");
-    }   
+    }
   }, [user]);
 
   useEffect(() => {
-    const resultLocal = localStorage.getItem("collectionDefaultUserAnswerCreated");
-    if (!resultLocal) {     
-      setcollectionDefaultUserAnswerCreated(true);
-      createCollectionAnswer();         
-    } else {    
-      return
-    } 
+    if (user && listQuestions) {
+      const startTeste = async () => {
+        Api.startTeste(user.id, listQuestions);
+      };
+      startTeste();
+    }
   }, [user, listQuestions]);
 
-  const handleSubmitQuestion = () => {};
- 
+  const handleSubmitQuestion = async () => {
+    await Api.submitAnswerValues(user.id, userAnswers).then(() => {
+      setcurrentQuestion(currentQuestion + 1);
+    });
+  };
+
+  const handleSubmitTest = () => {};
 
   return (
     <C.Container>
@@ -108,8 +102,15 @@ export const Teste = () => {
           listQuestions={listQuestions}
           setUserAnswers={setUserAnswers}
         />
-        <C.Button disabled={buttonNextActive} onClick={handleSubmitQuestion}>
-          Próxima
+        <C.Button
+          disabled={buttonNextActive}
+          onClick={
+            currentQuestion < isLastQuestion + 1
+              ? handleSubmitQuestion
+              : handleSubmitQuestion
+          }
+        >
+          {currentQuestion == isLastQuestion + 1 ? "Finalizar" : "Próxima"}
         </C.Button>
       </C.TesteContainer>
     </C.Container>

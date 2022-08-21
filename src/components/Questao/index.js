@@ -4,13 +4,20 @@ import { ModalNumber } from "../../components/ModalNumber";
 import { Valores } from "../ModalNumber/styles";
 import { border } from "@mui/system";
 
-export const Questao = ({ listQuestions, setUserAnswers }) => {
+import { useControlsQuestions } from "../../hooks/useControlsQuestions";
+
+
+export const Questao = ({ listQuestions, setUserAnswers}) => {
   const [inputValueA, setInputValueA] = useState("");
   const [inputValueB, setInputValueB] = useState("");
   const [inputValueC, setInputValueC] = useState("");
   const [inputValueD, setInputValueD] = useState("");
   const [position, setPosition] = useState("");
   const [modal, setModal] = useState(false);
+
+  const [item, setItem] = useState({});
+
+  const { currentQuestion, lastQuestion } = useControlsQuestions();
 
   const handleInput = (position) => {
     setModal(true);
@@ -25,12 +32,22 @@ export const Questao = ({ listQuestions, setUserAnswers }) => {
     }
   }, [inputValueA, inputValueB, inputValueC, inputValueD]);
 
-  
+ useEffect(() => {
+  if(listQuestions) {
+    setItem(listQuestions[currentQuestion])   
+    setInputValueA('') 
+    setInputValueB('') 
+    setInputValueC('') 
+    setInputValueD('') 
+  }
+ },[currentQuestion, item])
+ 
+ 
 
   return (
-    <C.Container>
-      {listQuestions.map((item, key) => (
-        <div key={key} className="questao-item">
+    <C.Container>     
+      { item && (
+        <div className="questao-item">
           <C.ContainerTituloPergunta>
             <h1 className="titulo"> {item.title} </h1>
           </C.ContainerTituloPergunta>
@@ -61,7 +78,7 @@ export const Questao = ({ listQuestions, setUserAnswers }) => {
 
               <tr>
                 <td>
-                  <span>{item.b}</span>
+                  <span >{item.b}</span>
                   <C.ButtonOverLay onClick={() => handleInput("B")}>
                     <C.Input
                       validate={
@@ -129,8 +146,7 @@ export const Questao = ({ listQuestions, setUserAnswers }) => {
               </tr>
             </tbody>
           </C.ContainerTabela>
-        </div>
-      ))}
+        </div>  )}
       {modal && (
         <ModalNumber
           setModal={setModal}

@@ -116,7 +116,7 @@ export function AuthContextProvider(props) {
   async function getName() {
     const auth = getAuth();
     const user = auth.currentUser;
-    let result = await Api.getNameUser(user.uid);
+    let result = await Api.getUser(user.uid);
     setUser({
       id: user.uid,
       name: result.name,
@@ -127,6 +127,7 @@ export function AuthContextProvider(props) {
   return (
     <AuthContext.Provider
       value={{
+        getName,
         user,
         setUser,
         signInWithGoogle,

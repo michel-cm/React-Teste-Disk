@@ -1,4 +1,12 @@
-import { doc, setDoc, collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  arrayUnion
+} from "firebase/firestore";
 import "firebase/compat/firestore";
 import { firebase, database } from "../services/firebase";
 
@@ -23,48 +31,68 @@ export const Api = {
     return list;
   },
 
-  addUser:async (id, name) => {
-    await database.collection('users').doc(id).set({
-      id,
-      name,
-    }, {merge:true});
+  addUser: async (id, name) => {
+    await database.collection("users").doc(id).set(
+      {
+        idUser: id,
+        name: name,
+      },
+      { merge: true }
+    );
   },
 
-  getNameUser: async (id) => {
-    let user = await database.collection('users').doc(id).get();
+  getUser: async (id) => {
+    let user = await database.collection("users").doc(id).get();
     let userData = user.data();
     return userData;
   },
 
-  createDefaultCollectionAnswerUser: async (
-    user,
-    listQuestions,
-    collectionDefaultUserAnswerCreated
-  ) => {
-    if (collectionDefaultUserAnswerCreated) {
-      return;
-    }
-    if (user && listQuestions) {
-      localStorage.setItem("collectionDefaultUserAnswerCreated", {id: user.id, create:true});
-      let questaoA,
-        questaoB,
-        questaoC,
-        questaoD = "";
-      const docData = {
-        data: new Date(),
-        finalizado: false,
-        idUser: user.id,
-        predominancia: "",
-        tempoExcedido: false,
-        resultadoFinal: {
-          totalA: 0,
-          totalB: 0,
-          totalC: 0,
-          totalD: 0,
+  startTeste: async (id, listQuestions) => {
+    await database
+      .collection("testes")
+      .doc(id)
+      .set(
+        {
+          questionsList: [...listQuestions],
+          valoresQuestionsUser: [],
+          tempo: 1200,
+          idUser: id,
+          finalizado: false,
+          tempoExcedido: false,
+          totalCadaLetra: [],
+          predominancia: '',
         },
-      };
+        { merge: true }
+      );
+  },
 
-      await addDoc(collection(database, "respostas"), docData);
-    }
+  getTesteUser: async (idUser) => {
+    let result = await database.collection("testes").doc(idUser).get();
+    console.log(result)
+  },
+
+  submitAnswerValues: async (idTeste, valoresUser, currentQuestion) => {
+    console.log(valoresUser)
+    const testRef = doc(database, "testes", idTeste);
+    await updateDoc(testRef, {    
+      valoresQuestionsUser: arrayUnion({a:valoresUser[0], b:valoresUser[1] ,c:valoresUser[2], d:valoresUser[3]})});
+  },
+
+  finallyTest: async (idTeste, idUser) => {
+
+    let valoresQuestions = await database.collection("testes").doc(idUser).get();
+
+    console.log(valoresQuestions)
+
+    await database
+      .collection("testes")
+      .doc(idTeste)
+      .set(
+        {          
+          finalizado: true,
+          predominancia: 'Dominante'
+        },
+        { merge: true }
+      );
   },
 };
