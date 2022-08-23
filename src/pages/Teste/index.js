@@ -18,11 +18,11 @@ export const Teste = () => {
   const [listQuestions, setListQuestions] = useState([]);
   const [buttonNextActive, setButtonNextActive] = useState(true);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [isLastQuestion, setisLastQuestion] = useState(listQuestions.length);
+  const [isLastQuestion, setisLastQuestion] = useState(false);
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { currentQuestion, lastQuestion, setcurrentQuestion, setLastQuestion } =
+  const { currentQuestion, setcurrentQuestion, setIsDone, lastQuestion } =
     useControlsQuestions();
 
   const getList = async () => {
@@ -70,19 +70,31 @@ export const Teste = () => {
   useEffect(() => {
     if (user && listQuestions) {
       const startTeste = async () => {
-        Api.startTeste(user.id, listQuestions);
+        await Api.startTeste(user.id, listQuestions);
       };
       startTeste();
     }
   }, [user, listQuestions]);
 
   const handleSubmitQuestion = async () => {
-    await Api.submitAnswerValues(user.id, userAnswers).then(() => {
-      setcurrentQuestion(currentQuestion + 1);
-    });
+    await Api.submitAnswerValues(user.id, userAnswers, currentQuestion).then(
+      () => {
+        setcurrentQuestion(currentQuestion + 1);
+      }
+    );
   };
 
-  const handleSubmitTest = () => {};
+  useEffect(() => {
+    if (currentQuestion) {
+      if (currentQuestion + 1 == lastQuestion) {
+        setisLastQuestion(true);
+      }
+    }
+  }, [currentQuestion]);
+
+  const handleSubmitTest = () => {
+    setIsDone(true);
+  };
 
   return (
     <C.Container>
@@ -91,7 +103,9 @@ export const Teste = () => {
         <C.InfoTesteArea>
           <C.InfoQuestaoAtual>
             <AssignmentOutlinedIcon style={{ color: "#2B6DE6" }} />
-            <span className="info-questao-atual-content">1/23</span>
+            <span className="info-questao-atual-content">
+              {currentQuestion + 1}/{listQuestions.length}
+            </span>
           </C.InfoQuestaoAtual>
           <C.InfoTempo>
             <HourglassFullOutlinedIcon style={{ color: "#f2f2f2" }} />
@@ -104,13 +118,9 @@ export const Teste = () => {
         />
         <C.Button
           disabled={buttonNextActive}
-          onClick={
-            currentQuestion < isLastQuestion + 1
-              ? handleSubmitQuestion
-              : handleSubmitQuestion
-          }
+          onClick={isLastQuestion ? handleSubmitTest : handleSubmitQuestion}
         >
-          {currentQuestion == isLastQuestion + 1 ? "Finalizar" : "Próxima"}
+          {isLastQuestion ? "Finalizar" : "Próxima"}
         </C.Button>
       </C.TesteContainer>
     </C.Container>

@@ -5,10 +5,10 @@ import {
   getDocs,
   addDoc,
   updateDoc,
-  arrayUnion
+  arrayUnion,
 } from "firebase/firestore";
 import "firebase/compat/firestore";
-import { firebase, database } from "../services/firebase";
+import { database } from "../services/firebase";
 
 export const Api = {
   getAllQuestions: async () => {
@@ -56,11 +56,12 @@ export const Api = {
           questionsList: [...listQuestions],
           valoresQuestionsUser: [],
           tempo: 1200,
+          qtdQuestions: listQuestions.length  ,
           idUser: id,
           finalizado: false,
           tempoExcedido: false,
-          totalCadaLetra: [],
-          predominancia: '',
+          totalCadaLetra: { a: 0, b: 0, c: 0, d: 0 },
+          predominancia: "",
         },
         { merge: true }
       );
@@ -68,31 +69,36 @@ export const Api = {
 
   getTesteUser: async (idUser) => {
     let result = await database.collection("testes").doc(idUser).get();
-    console.log(result)
+
+    let data = result.data();   
+    return data;
   },
 
   submitAnswerValues: async (idTeste, valoresUser, currentQuestion) => {
-    console.log(valoresUser)
+    console.log(valoresUser);
     const testRef = doc(database, "testes", idTeste);
-    await updateDoc(testRef, {    
-      valoresQuestionsUser: arrayUnion({a:valoresUser[0], b:valoresUser[1] ,c:valoresUser[2], d:valoresUser[3]})});
+    await updateDoc(testRef, {
+      valoresQuestionsUser: arrayUnion({
+        a: valoresUser[0],
+        b: valoresUser[1],
+        c: valoresUser[2],
+        d: valoresUser[3],
+      }),
+    });
   },
 
-  finallyTest: async (idTeste, idUser) => {
+  finallyTest: async (idTeste, idUser, valoresTotais, predominancia, tempoExcedido) => {
+   
+    console.log(valoresTotais);
 
-    let valoresQuestions = await database.collection("testes").doc(idUser).get();
-
-    console.log(valoresQuestions)
-
-    await database
-      .collection("testes")
-      .doc(idTeste)
-      .set(
-        {          
-          finalizado: true,
-          predominancia: 'Dominante'
-        },
-        { merge: true }
-      );
+    await database.collection("testes").doc(idTeste).set(
+      {
+        tempo: 6000,
+        finalizado: true,
+        predominancia: "Dominante",
+        totalCadaLetra: {}
+      },
+      { merge: true }
+    );
   },
 };
