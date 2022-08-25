@@ -10,31 +10,49 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEffect } from "react";
 
 import { Api } from "../../services/Api";
-
+import { useState } from "react";
 
 export const Instrucoes = () => {
-
   const { user, setUser } = useAuth();
 
-  const navigate = useNavigate(); 
+  const [listQuestions, setListQuestions] = useState([]);
+
+  const navigate = useNavigate();
+
+  const getList = async () => {
+    const result = await Api.getAllQuestions();
+    setListQuestions(result);
+    localStorage.setItem("listQuestions", JSON.stringify(result));
+    localStorage.setItem("lenghtList", JSON.stringify(result.length));
+  };
 
   useEffect(() => {
-    if(!user) {
-      navigate('/');
+    if (!user) {
+      navigate("/");
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     const getName = async () => {
-        if (user != null) {
-        const data = await Api.getUser(user.id);        
+      if (user != null) {
+        const data = await Api.getUser(user.id);
         setUser({
-          ...user,         
-          name: data.name
-        })
-      };
-    }
+          ...user,
+          name: data.name,
+        });
+      }
+    };
     getName();
+  }, [user]);
+
+  useEffect(() => {
+    ////////
+    const listLocal = localStorage.getItem("listQuestions");
+    if (listLocal !== null) {
+      setListQuestions(JSON.parse(listLocal));
+    } else {
+      getList();
+    }
   }, []);
 
   return (
@@ -109,7 +127,8 @@ export const Instrucoes = () => {
               não pode ser usado duas vezes na mesma questão.
             </p>
             <C.AreaTempo>
-              <AccessTimeOutlinedIcon /> Tempo do teste:<span> 20 minutos</span>.
+              <AccessTimeOutlinedIcon /> Tempo do teste:<span> 20 minutos</span>
+              .
             </C.AreaTempo>
           </C.AreaLembrete>
         </C.AreaInstrucoes>

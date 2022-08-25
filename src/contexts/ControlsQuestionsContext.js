@@ -2,7 +2,7 @@ import React from "react";
 import { createContext, useEffect, useState } from "react";
 
 import { useAuth } from "../hooks/useAuth";
-
+import { useNavigate } from "react-router-dom";
 import { Api } from "../services/Api";
 
 export const ControlsQuestionsContext = createContext({});
@@ -14,16 +14,18 @@ export const ControlsQuestionsContextProvider = (props) => {
   const [currentTestUserBd, setCurrentTestUserBd] = useState();
   const [lastQuestion, setLastQuestion] = useState();
 
+  const navigate = useNavigate();
+
   const { user } = useAuth();
 
-  const getCurrentTest = async () => {
-    const testeUser = await Api.getTesteUser(user.id);
+  const getCurrentTest = async (userId) => {
+    const testeUser = await Api.getTesteUser(userId);
     setCurrentTestUserBd(testeUser);
   };
 
   useEffect(() => {
     if (user && !currentTestUserBd) {
-      getCurrentTest();
+      getCurrentTest(user.id);
     } else {
       return;
     }
@@ -33,8 +35,16 @@ export const ControlsQuestionsContextProvider = (props) => {
     if (currentTestUserBd) {
       const qtd = currentTestUserBd.qtdQuestions;
       setLastQuestion(qtd);
+      setcurrentQuestion(currentTestUserBd.currentQuestion)
     }
   }, [currentTestUserBd]);
+
+  useEffect(() => {
+    if(isDone) {
+      navigate('/finally')
+    }
+  },[isDone])
+ 
 
   return (
     <ControlsQuestionsContext.Provider
@@ -47,6 +57,7 @@ export const ControlsQuestionsContextProvider = (props) => {
         setAllValues,
         currentTestUserBd,
         lastQuestion,
+        getCurrentTest
       }}
     >
       {props.children}

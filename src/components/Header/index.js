@@ -38,12 +38,12 @@ export const Header = () => {
             )}
           </span>
         </C.UserArea>
-
+           
         <Link to={"/instrucoes"}>
           <C.Button>
             <p>Instruções</p>
           </C.Button>
-        </Link>
+        </Link>   
       </C.Container>
       {logoutArea && (
         <C.LogoutArea>

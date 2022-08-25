@@ -31,16 +31,16 @@ export const InfoQuestaoAtual = styled.div`
   margin-right: 16px;
 `;
 
-export const InfoTempo = styled.div`
-  background-color: rgba(0, 128, 0, 0.479);
-  border-radius: 2px;
+export const InfoTempo = styled.div` 
   height: 70px;
   width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  margin-left: 16px;
+  color: #444;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 48px;
 `;
 
 export const Button = styled.button`

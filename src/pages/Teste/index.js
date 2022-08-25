@@ -20,16 +20,17 @@ export const Teste = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [isLastQuestion, setisLastQuestion] = useState(false);
 
+
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { currentQuestion, setcurrentQuestion, setIsDone, lastQuestion } =
-    useControlsQuestions();
+  const {
+    currentQuestion,
+    setcurrentQuestion,
+    setIsDone,        
+    currentTestUserBd,   
+    
+  } = useControlsQuestions();
 
-  const getList = async () => {
-    let results = await Api.getAllQuestions();
-    localStorage.setItem("listQuestions", JSON.stringify(results));
-    setListQuestions(results);
-  };
 
   function elementEqual(element, index, array) {
     return element == "";
@@ -50,15 +51,21 @@ export const Teste = () => {
       setButtonNextActive(false);
     }
   }, [userAnswers]);
+  
+  useEffect(() => {
+    if (currentTestUserBd) {      
+      if (currentTestUserBd.finalizado) {
+        navigate("/finally");
+      }     
+    }
+  }, [currentTestUserBd]);
+
 
   useEffect(() => {
     ////////
     const listLocal = localStorage.getItem("listQuestions");
     if (listLocal !== null) {
-      setListQuestions(JSON.parse(listLocal));
-    } else {
-      getList();
-    }
+      setListQuestions(JSON.parse(listLocal));}
   }, []);
 
   useEffect(() => {
@@ -76,26 +83,40 @@ export const Teste = () => {
     }
   }, [user, listQuestions]);
 
-  const handleSubmitQuestion = async () => {
-    await Api.submitAnswerValues(user.id, userAnswers, currentQuestion).then(
-      () => {
-        setcurrentQuestion(currentQuestion + 1);
-      }
-    );
-  };
-
   useEffect(() => {
     if (currentQuestion) {
+     const lastQuestion = localStorage.getItem('lenghtList')
       if (currentQuestion + 1 == lastQuestion) {
         setisLastQuestion(true);
       }
     }
   }, [currentQuestion]);
 
-  const handleSubmitTest = () => {
-    setIsDone(true);
+
+  const handleSubmitQuestion = async () => {
+    await Api.submitAnswerValues(
+      user.id,
+      userAnswers,
+      currentQuestion,
+      false,      
+    ).then(() => {
+      setcurrentQuestion(currentQuestion + 1);
+      setButtonNextActive(true)
+    });
   };
 
+  const handleSubmitTest = async () => {
+    await Api.submitAnswerValues(
+      user.id,
+      userAnswers,
+      currentQuestion,
+      true,     
+    ).then(() => {
+      setIsDone(true);
+    });
+  };
+  
+  
   return (
     <C.Container>
       <Header />
@@ -107,10 +128,30 @@ export const Teste = () => {
               {currentQuestion + 1}/{listQuestions.length}
             </span>
           </C.InfoQuestaoAtual>
-          <C.InfoTempo>
-            <HourglassFullOutlinedIcon style={{ color: "#f2f2f2" }} />
-            <span className="info-questao-atual-content">18:32</span>
-          </C.InfoTempo>
+       { /* <C.InfoTempo>
+            {currentTestUserBd && (
+              <CountdownCircleTimer
+                size={100}
+                isPlaying
+                onComplete={handleSubmitTest}
+                duration={timer}
+                colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+                colorsTime={[7, 3, 2, 0]}
+              >
+                {({ remainingTime }) => {
+                  
+                  localStorage.setItem('currentTime',  remainingTime)
+                  
+                  const minutes = Math.floor(remainingTime / 60);
+                  const seconds = remainingTime % 60;
+
+                  return `${minutes < 10 ? "0" + minutes : minutes}:${
+                    seconds < 10 ? "0" + seconds : seconds
+                  }`;
+                }}
+              </CountdownCircleTimer>
+            )}
+              </C.InfoTempo>*/}
         </C.InfoTesteArea>
         <Questao
           listQuestions={listQuestions}
