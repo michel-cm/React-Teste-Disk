@@ -48,7 +48,7 @@ export const Api = {
   },
 
 
-  startTeste: async (id, listQuestions) => {
+  startTeste: async (id,name,email, listQuestions) => {
     const testeUser = await database.collection("testes").doc(id).get();
 
     let currentTime;
@@ -67,7 +67,9 @@ export const Api = {
         .collection("testes")
         .doc(id)
         .set(
-          {
+          { 
+            nome: name,
+            email,
             currentQuestion: 0,
             questionsList: [...listQuestions],
             valoresQuestionsUser: [],            

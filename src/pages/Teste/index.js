@@ -77,7 +77,7 @@ export const Teste = () => {
   useEffect(() => {
     if (user && listQuestions) {
       const startTeste = async () => {
-        await Api.startTeste(user.id, listQuestions);
+        await Api.startTeste(user.id,user.name,user.email,listQuestions);
       };
       startTeste();
     }
