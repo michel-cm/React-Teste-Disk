@@ -28,17 +28,18 @@ export function AuthContextProvider(props) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {     
       if (user) {
-        const { email } = user;
-        getTesteCandidate(email);
+        getTesteCandidate(user.email);
       }
-    });
+    },[user]);
 
     return () => {
       unsubscribe();
     };
   }, []);
+
+  console.log(user);
 
   async function logoutAccount() {
     const auth = getAuth();
@@ -85,6 +86,7 @@ export function AuthContextProvider(props) {
         user,
         getTesteCandidate,
 
+        setUser,
         logoutAccount,
         loginWithEmail,
         createAccount,

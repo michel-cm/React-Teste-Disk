@@ -29,17 +29,13 @@ export const Home = () => {
         setListCandidatesPermissions(data);
       });
     }
-  }, [listCandidatesPermissions]);
-
-  async function handleLoginGoogle() {
-    if (!user) {
-      await signInWithGoogle().then(() => navigate("/instrucoes"));
-    }
-  }
+  }, []);
 
   useEffect(() => {
     if (user) {
-      navigate("/instrucoes");
+      if (user.email) {
+        navigate("/instrucoes");
+      }
     }
   }, [user]);
 

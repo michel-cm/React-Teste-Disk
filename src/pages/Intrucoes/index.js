@@ -8,13 +8,15 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEffect } from "react";
 
 export const Instrucoes = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/");
+    if (user) {
+      if (!user.email) {
+        navigate("/");
+      }
     }
   }, [user]);
 
@@ -24,7 +26,7 @@ export const Instrucoes = () => {
         navigate("/finalizado");
       }
     }
-  }, [user])
+  }, [user]);
 
   return (
     <C.Container>
@@ -98,7 +100,8 @@ export const Instrucoes = () => {
               não pode ser usado duas vezes na mesma questão.
             </p>
             <C.AreaTempo>
-              Tempo do teste:<span> 20 minutos</span>.
+              Tempo do teste:<span> {user ? user.timer / 60 : ""} minutos</span>
+              .
             </C.AreaTempo>
           </C.AreaLembrete>
         </C.AreaInstrucoes>
