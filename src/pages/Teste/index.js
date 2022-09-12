@@ -32,6 +32,15 @@ export const Teste = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (user) {
+      if (user.finalizado) {
+        navigate("/finalizado");
+      }
+    }
+  }, [user]);
+  console.log(user);
+
   function elementEqual(element, index, array) {
     return element == "";
   }
@@ -57,6 +66,7 @@ export const Teste = () => {
     //  each question
     await Api.submitAnswerValues(userAnswers, user).then(async () => {
       await getTesteCandidate(user.email);
+      setButtonNextActive(true)
     });
   };
 
@@ -98,7 +108,7 @@ export const Teste = () => {
     // final question
     await Api.submitAnswerValues(userAnswers, user).then(async () => {
       await Api.getTesteUser(user.email).then(async (data) => {
-        console.log(user)
+        console.log(user);
         let valoresTotais = { a: 0, b: 0, c: 0, d: 0 };
 
         valoresTotais.a = data.valoresQuestionsUser
@@ -125,7 +135,13 @@ export const Teste = () => {
             return sum + i;
           });
         const predominancia = getPredominancia(valoresTotais);
-       await Api.finallyTest(user, valoresTotais, predominancia);
+        await Api.finallyTest(user, valoresTotais, predominancia).then(
+          async () => {
+            await getTesteCandidate(user.email).then(() => {
+              navigate("/finalizado");
+            });
+          }
+        );
       });
     });
   };

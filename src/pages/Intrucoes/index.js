@@ -18,6 +18,14 @@ export const Instrucoes = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (user) {
+      if (user.finalizado) {
+        navigate("/finalizado");
+      }
+    }
+  }, [user])
+
   return (
     <C.Container>
       <C.Logo src={logo} alt="Giro Agro logo" />
