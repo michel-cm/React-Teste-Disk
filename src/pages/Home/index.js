@@ -18,6 +18,7 @@ export const Home = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
 
   const [listCandidatesPermissions, setListCandidatesPermissions] = useState(
     []
@@ -54,6 +55,11 @@ export const Home = () => {
 
   const handleCreateAccount = (e) => {
     e.preventDefault();
+
+    if(password != confirmPassword) {
+      alert('senhas diferentes!')
+      return
+    }
 
     let flag = false;
     listCandidatesPermissions.forEach(async (candidate) => {
@@ -115,6 +121,7 @@ export const Home = () => {
               placeholder="Senha"
             ></C.Passoword>
             <C.PassowordVerificy
+              onChange={(e) => setconfirmPassword(e.target.value)}
               type={"password"}
               placeholder="Confirme sua senha"
             ></C.PassowordVerificy>

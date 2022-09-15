@@ -27,7 +27,7 @@ export const Content = styled.div`
 `;
 
 export const Logout = styled.div`
-cursor: pointer;
+  cursor: pointer;
   margin-top: 32px;
   border: 1px solid #2261bc;
   padding: 8px 24px;
@@ -36,7 +36,7 @@ cursor: pointer;
   font-size: 18px;
 
   &:hover {
-    background-color: #2261BC;
+    background-color: #2261bc;
     color: #f8f8f8;
   }
 `;

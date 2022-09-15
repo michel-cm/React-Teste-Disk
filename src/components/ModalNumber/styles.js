@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: rgba(77, 77, 77, 0.6); 
-  display: flex;  
+  background-color: rgba(77, 77, 77, 0.6);
+  display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   bottom: 0;
   left: 0;
   position: fixed;
-  transition: all 0.4s; 
+  transition: all 0.4s;
   z-index: 10;
 `;
 
@@ -50,19 +50,17 @@ export const Button = styled.button`
   }
 `;
 
-export const AreaClose = styled.div`    
-    text-align: end;
-    padding-bottom: 8px;
+export const AreaClose = styled.div`
+  text-align: end;
+  padding-bottom: 8px;
 
-    svg {
-      font-size: 28px;
-      cursor: pointer;
-      transition: all 0.3s;
+  svg {
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.3s;
 
-      &:hover {
-        color: #ed3237;
-      }
+    &:hover {
+      color: #ed3237;
     }
-
-
+  }
 `;

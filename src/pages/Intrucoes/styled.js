@@ -11,10 +11,9 @@ export const Logo = styled.img`
   width: 120px;
   padding: 60px 0px 60px 0px;
 
-  @media (max-width: 460px) {   
+  @media (max-width: 460px) {
     padding: 60px 0px 24px 0px;
   }
-  
 `;
 
 export const ContainerInstrucoes = styled.div`
@@ -74,8 +73,8 @@ export const AreaExemplosResposta = styled.div`
   margin: 32px 64px 48px 64px;
   gap: 32px;
 
-  @media (max-width: 460px) {   
-    margin : 24px 0px 24px 0px ;
+  @media (max-width: 460px) {
+    margin: 24px 0px 24px 0px;
     gap: 16px;
   }
 `;
@@ -97,10 +96,9 @@ export const AreaRespostaIncorreta = styled.div`
     font-weight: 500;
     color: #ed3237;
   }
-  @media (max-width: 460px) {   
+  @media (max-width: 460px) {
     padding: 16px;
   }
-  
 `;
 
 export const AreaRespostaCorreta = styled.div`
@@ -120,10 +118,9 @@ export const AreaRespostaCorreta = styled.div`
     font-weight: 500;
     color: #39b54a;
   }
-  @media (max-width: 460px) {   
+  @media (max-width: 460px) {
     padding: 18px 25px 18px 25px;
   }
-  
 `;
 
 export const AreaLembrete = styled.div`

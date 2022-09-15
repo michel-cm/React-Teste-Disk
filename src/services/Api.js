@@ -35,17 +35,17 @@ export const Api = {
     });
   },
 
-  startTeste: async ({email}) => {
+  startTeste: async ({ email }) => {
     const created = firebase.firestore.Timestamp.fromDate(new Date()).toDate();
 
     const candidateTestRef = doc(database, "testes", email);
     await updateDoc(candidateTestRef, {
-      tempoStart: created,      
+      tempoStart: created,
     });
   },
 
-  updateTimer: async ({email, timer}, timerActual) => {
-    console.log('fui chamado pra update timer .... ')
+  updateTimer: async ({ email, timer }, timerActual) => {
+    console.log("fui chamado pra update timer .... ");
     const candidateTestRef = doc(database, "testes", email);
     await updateDoc(candidateTestRef, {
       timerUsed: timer - timerActual,

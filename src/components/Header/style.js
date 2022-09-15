@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const UserArea = styled.div`
-  display: flex;  
+  display: flex;
   align-items: center;
   cursor: pointer;
   transition: 0.3s;
@@ -34,13 +34,13 @@ export const UserArea = styled.div`
   button {
     border: none;
   }
-  -webkit-touch-callout: none;  /* iPhone OS, Safari */
-    -webkit-user-select: none;    /* Chrome, Safari 3 */
-    -khtml-user-select: none;     /* Safari 2 */
-    -moz-user-select: none;       /* Firefox */
-    -ms-user-select: none;        /* IE10+ */
-    user-select: none;            /* Possível implementação no futuro */
-    /* cursor: default; */
+  -webkit-touch-callout: none; /* iPhone OS, Safari */
+  -webkit-user-select: none; /* Chrome, Safari 3 */
+  -khtml-user-select: none; /* Safari 2 */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  user-select: none; /* Possível implementação no futuro */
+  /* cursor: default; */
 `;
 
 export const Button = styled.div`
@@ -55,38 +55,37 @@ export const Button = styled.div`
     background-color: #2b6de6;
 
     p {
-        color: #FFF;
+      color: #fff;
     }
   }
 `;
 
 export const LogoutArea = styled.div`
-  background-color: #FFF;
+  background-color: #fff;
   padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
   width: 260px;
-  border-radius:  0px 5px 5px 0px;
+  border-radius: 0px 5px 5px 0px;
   position: top;
-  z-index: 99;  
+  z-index: 99;
 
-  button {    
+  button {
     border: 0;
-    background-color: #FFF;
+    background-color: #fff;
     margin-top: 18px;
     cursor: pointer;
     font-weight: 500;
     height: 30px;
     width: 60px;
-    display: flex;    
-    font-size: 16px;     
-    font-family: 'Roboto', 'sans-serif';
+    display: flex;
+    font-size: 16px;
+    font-family: "Roboto", "sans-serif";
 
     &:hover {
-      color: #2b6de6 ;
-      
+      color: #2b6de6;
     }
   }
 `;

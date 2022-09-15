@@ -24,9 +24,7 @@ export const Finally = () => {
         <h2>Teste concluido.</h2>
         <p>A Giro Agro agradece e em breve entrará em contato.</p>
       </C.Content>
-      <C.Logout onClick={
-        logoutAccount
-      }>
+      <C.Logout onClick={logoutAccount}>
         <p>sair</p>
       </C.Logout>
     </C.Container>

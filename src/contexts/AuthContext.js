@@ -28,11 +28,14 @@ export function AuthContextProvider(props) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {     
-      if (user) {
-        getTesteCandidate(user.email);
-      }
-    },[user]);
+    const unsubscribe = auth.onAuthStateChanged(
+      (user) => {
+        if (user) {
+          getTesteCandidate(user.email);
+        }
+      },
+      [user]
+    );
 
     return () => {
       unsubscribe();

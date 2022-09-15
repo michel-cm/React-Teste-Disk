@@ -1,7 +1,5 @@
 import * as C from "./styles";
 
-import { useState } from "react";
-
 import { BsXCircle } from "react-icons/bs";
 
 export const ModalNumber = ({

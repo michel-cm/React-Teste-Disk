@@ -1,7 +1,5 @@
 import * as C from "./style";
 
-import { Link, Navigate } from "react-router-dom";
-
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 

@@ -1,23 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ContainerInstrucoes = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 8;
-
-  overflow: auto;
-
-  padding: 32px 0px;
-
+  background-color: #fff;
+  max-width: 1100px;
   margin: 64px 32px;
+  overflow: auto;
+  padding: 48px 24px;
 `;
+
 
 export const Logo = styled.img`
   width: 120px;
@@ -39,7 +34,7 @@ export const AreaIconClose = styled.div`
   }
 `;
 
-export const Icon = styled.div` 
+export const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,20 +42,6 @@ export const Icon = styled.div`
   width: 40px;
 `;
 
-export const ContainerInstrucoes = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #fff;
-  max-width: 1100px;
-  margin: 64px 32px;
-  overflow: auto;
-  padding: 48px 24px;
-`;
 
 export const TituloArea = styled.div`
   display: flex;

@@ -7,14 +7,13 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 `;
 
 export const AreaAccount = styled.div`
   display: flex;
   flex-direction: column;
   width: 92%;
-  max-width: 480px;  
+  max-width: 480px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -87,7 +86,6 @@ export const ButtonSubmitEmail = styled.button`
     filter: brightness(0.8);
   }
 `;
-
 
 export const AreaSignUp = styled.div`
   margin-top: 70px;
