@@ -66,13 +66,13 @@ export function AuthContextProvider(props) {
       });
   }
 
-  async function createAccount(email, senha, name) {
+  async function createAccount(email, password, name, cel, city) {
     // setIsLoading(true);
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, senha)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
-        await Api.startAccountCandidate(user.email, name, user.uid);
+        await Api.startAccountCandidate(user.email, name, cel, city, user.uid);
       })
       .then(async () => {
         await getTesteCandidate(email);

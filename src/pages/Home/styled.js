@@ -47,7 +47,12 @@ export const FormArea = styled.form`
   }
 `;
 
-export const Name = styled.input`
+export const Cel = styled.input`
+  padding: 10px;
+  width: 90%;
+  margin: 14px 0;
+`;
+export const City = styled.input`
   padding: 10px;
   width: 90%;
 `;

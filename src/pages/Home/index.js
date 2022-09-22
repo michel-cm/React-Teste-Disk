@@ -17,6 +17,8 @@ export const Home = () => {
     useAuth(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [cel, setCel] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
 
@@ -56,16 +58,16 @@ export const Home = () => {
   const handleCreateAccount = (e) => {
     e.preventDefault();
 
-    if(password != confirmPassword) {
-      alert('senhas diferentes!')
-      return
+    if (password != confirmPassword) {
+      alert("senhas diferentes!");
+      return;
     }
 
     let flag = false;
     listCandidatesPermissions.forEach(async (candidate) => {
       if (candidate.email == email) {
         flag = true;
-        await createAccount(email, password, name).then(() =>
+        await createAccount(email, password, name, cel, city).then(() =>
           navigate("/instrucoes")
         );
       }
@@ -105,11 +107,16 @@ export const Home = () => {
         <C.AreaAccount>
           <C.FormArea>
             <h1>Cadastrar</h1>
-            <C.Name
-              onChange={(e) => setName(e.target.value)}
+            <C.Cel
+              onChange={(e) => setCel(e.target.value)}
               type={"text"}
-              placeholder="Nome"
-            ></C.Name>
+              placeholder="Celular com DDD"
+            ></C.Cel>
+            <C.City
+              onChange={(e) => setCity(e.target.value)}
+              type={"text"}
+              placeholder="Cidade"
+            ></C.City>
             <C.Email
               onChange={(e) => setEmail(e.target.value)}
               type={"email"}

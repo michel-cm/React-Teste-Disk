@@ -27,11 +27,12 @@ export const Api = {
     return list;
   },
 
-  startAccountCandidate: async (emailUser, name, idUser) => {
+  startAccountCandidate: async (emailUser, idUser, cel,city) => {
     const candidateTestRef = doc(database, "testes", emailUser);
-    await updateDoc(candidateTestRef, {
-      name,
+    await updateDoc(candidateTestRef, {      
       idUser,
+      cel,
+      city
     });
   },
 
