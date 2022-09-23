@@ -72,7 +72,7 @@ export function AuthContextProvider(props) {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
-        await Api.startAccountCandidate(user.email, name, cel, city, user.uid);
+        await Api.startAccountCandidate(user.email, name, cel.split(" ").join(""), city, user.uid);
       })
       .then(async () => {
         await getTesteCandidate(email);
