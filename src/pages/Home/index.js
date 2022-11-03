@@ -48,7 +48,7 @@ export const Home = () => {
 
   const handleLoginEmail = async (e) => {
     e.preventDefault();
-    if (email || password) {
+    if (email && password) {
       await loginWithEmail(email, password).then(() => navigate("/instrucoes"));
     } else {
       alert("Campos Vazios!");
@@ -58,7 +58,7 @@ export const Home = () => {
   const handleCreateAccount = (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       alert("senhas diferentes!");
       return;
     }

@@ -15,6 +15,7 @@ import { Api } from "../../services/Api";
 import { useTimer } from "../../hooks/userTimer";
 
 import { ModalInstrucoes } from "./ModalInstrucoes";
+import { ModalNoteRepeatValue } from "./ModalNoteRepeatValue";
 
 export const Teste = () => {
   const [buttonNextActive, setButtonNextActive] = useState(true);
@@ -174,6 +175,7 @@ export const Teste = () => {
           <ModalInstrucoes setModalInstrucoes={setModalInstrucoes} />
         </C.ModalInstrucoes>
       )}
+
       <C.TesteContainer>
         <C.InfoTesteArea>
           <C.InfoQuestaoAtual>
@@ -209,6 +211,7 @@ export const Teste = () => {
           }
         </C.InfoTesteArea>
         <Questao user={user} setUserAnswers={setUserAnswers} />
+        
         <C.Button
           disabled={buttonNextActive}
           onClick={
@@ -221,6 +224,7 @@ export const Teste = () => {
             ? "Finalizar"
             : "Próxima"}
         </C.Button>
+      <ModalNoteRepeatValue />
       </C.TesteContainer>
     </C.Container>
   );

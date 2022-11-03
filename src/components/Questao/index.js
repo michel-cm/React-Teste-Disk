@@ -12,6 +12,8 @@ export const Questao = ({ user, setUserAnswers }) => {
 
   const [item, setItem] = useState({});
 
+  const [valuesEquals, setValuesEqualss] = useState(false);
+
   const handleInput = (position) => {
     setModal(true);
     setPosition(position);

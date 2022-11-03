@@ -21,6 +21,12 @@ export const Instrucoes = () => {
   }, [user]);
 
   useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (user) {
       if (user.finalizado) {
         navigate("/finalizado");
